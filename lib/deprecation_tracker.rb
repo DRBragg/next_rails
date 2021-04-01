@@ -45,7 +45,7 @@ class DeprecationTracker
     transform_message = opts[:transform_message]
     deprecation_tracker = DeprecationTracker.new(shitlist_path, transform_message)
     if defined?(ActiveSupport)
-      ActiveSupport::Deprecation.behavior << -> (message, _callstack, _deprecation_horizon, _gem_name) { deprecation_tracker.add(message) }
+      ActiveSupport::Deprecation.behavior << -> (message, _callstack = nil, _deprecation_horizon = nil, _gem_name = nil) { deprecation_tracker.add(message) }
     end
     KernelWarnTracker.callbacks << -> (message) { deprecation_tracker.add(message) }
 
